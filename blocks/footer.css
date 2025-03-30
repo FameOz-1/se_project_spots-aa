@@ -1,0 +1,15 @@
+.footer {
+  background-color: #fcf5e5;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.footer__copyright {
+  margin: 0;
+  opacity: 70%;
+}
+
+.footer__copyright_type_text {
+  text-decoration: underline;
+}
