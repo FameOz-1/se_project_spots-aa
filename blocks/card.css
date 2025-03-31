@@ -12,6 +12,10 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 365px;
 }
 
 .card__content {
@@ -42,5 +46,6 @@
   .card__title {
     font-size: 16px;
     line-height: 1;
+    max-width: 240px;
   }
 }
