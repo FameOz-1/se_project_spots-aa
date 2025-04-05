@@ -2,6 +2,8 @@
 
 An interactive social media web application that allows users to create a personal profile and share photos. Users can add and remove photos, like photos from other users, and make minor adjustments to their profile.
 
+- [Link to video description of Spots](https://www.loom.com/share/4756a4c486f5479fa37e97b66b8737bf?sid=01bce196-b1d4-49b0-822d-561ff3ccd0fdgit)
+
 ## Project Features
 
 - Responsive web design that adapts to different screen sizes (320px and up)
