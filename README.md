@@ -27,7 +27,7 @@ An interactive social media web application that allows users to create a person
 ## Project Links
 
 - [Link to the project on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
-- [Link to the project on GitHub Pages](YOUR_GITHUB_PAGES_URL)
+- [Link to the project on GitHub Pages](https://fameoz-1.github.io/t10_p3_spots-app/)
 
 ## Plans for Finalizing the Project
 
