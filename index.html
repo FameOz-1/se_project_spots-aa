@@ -129,6 +129,72 @@
           <span class="footer__span">Spots</span> Austin G. Abbott.
         </p>
       </footer>
+      <div class="modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn">
+            <img
+              src="./images/close.svg"
+              alt="Close icon"
+              class="modal__close-icon"
+            />
+          </button>
+          <h2 class="modal__title">Edit Profile</h2>
+          <form class="modal__form">
+            <label for="profile-name-input" class="modal__label"
+              >Name
+              <input
+                id="profile-name-input"
+                type="text"
+                class="modal__input"
+                placeholder="Type your name"
+              />
+            </label>
+            <label for="profile-description-input" class="modal__label"
+              >Description
+              <input
+                id="profile-description-input"
+                type="text"
+                class="modal__input"
+                placeholder="Describe yourself"
+              />
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal modal_is-opened">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn">
+            <img
+              src="./images/close.svg"
+              alt="Close icon"
+              class="modal__close-icon"
+            />
+          </button>
+          <h2 class="modal__title">New post</h2>
+          <form class="modal__form">
+            <label for="post-image-input" class="modal__label"
+              >Image link
+              <input
+                id="post-image-input"
+                type="url"
+                class="modal__input"
+                placeholder="Paste a link to the picture"
+              />
+            </label>
+            <label for="post-caption-input" class="modal__label"
+              >Caption
+              <input
+                id="post-caption-input"
+                type="text"
+                class="modal__input"
+                placeholder="Type your caption"
+              />
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>
