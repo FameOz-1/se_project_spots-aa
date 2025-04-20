@@ -1,9 +1,4 @@
-# SPOTS: Project 4; Final Draft
-
-- ToDo: 4/19/25
-
-* update readme.md to include all aspects according to the project brief
-* correct all comments from code revision.
+# SPOTS: Project 4; Final:
 
 An interactive social media web application that allows users to create a personal profile and share photos. Users can add and remove photos, like photos from other users, and make minor adjustments to their profile.
 

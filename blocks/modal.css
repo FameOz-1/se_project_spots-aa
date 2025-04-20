@@ -24,6 +24,7 @@
   background-color: #fff;
   max-width: 730px;
   width: 100%;
+  box-sizing: border-box;
   border-radius: 8px;
   padding: 32px 50px;
   position: relative;
@@ -71,6 +72,7 @@
   border-radius: 8px;
   padding: 16px 12px;
   font-size: 20px;
+  line-height: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -83,6 +85,7 @@
 .modal__submit-btn {
   max-width: 156px;
   padding: 18px 32px;
+  border: none;
   border-radius: 8px;
   background-color: #212121;
   color: #fcf5e5;
@@ -90,7 +93,7 @@
 
 .modal__submit-btn:hover {
   cursor: pointer;
-  background-color: #000000;
+  background-color: #000;
 }
 
 @media screen and (max-width: 627px) {
