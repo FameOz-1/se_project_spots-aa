@@ -68,7 +68,7 @@
 
 .modal__input {
   margin-bottom: 32px;
-  border: 1px rgba(33, 33, 33, 0.4) solid;
+  border: 1px #21212166 solid;
   border-radius: 8px;
   padding: 16px 12px;
   font-size: 20px;
@@ -80,6 +80,10 @@
 
 .modal__input:placeholder {
   color: #2121214d;
+}
+
+.modal__input:hover {
+  border: 1px #212121 solid;
 }
 
 .modal__submit-btn {
