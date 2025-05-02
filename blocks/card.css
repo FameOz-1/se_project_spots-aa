@@ -32,14 +32,25 @@
   background-position: center;
   width: 23px;
   height: 20px;
+  padding: 0;
   border: none;
   background-color: transparent;
   opacity: 40%;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .card__like-btn:hover {
   opacity: 100%;
-  cursor: pointer;
+}
+
+.card__like-btn_active {
+  background-image: url(../images/love-active.svg);
+  opacity: 100%;
+}
+
+.card__like-btn_active:hover {
+  opacity: 40%;
 }
 
 @media screen and (max-width: 627px) {
