@@ -126,8 +126,8 @@
 .modal__caption {
   color: #fff;
   background-color: #000;
-  max-width: 214px;
-  max-height: 32px;
+  object-fit: contain;
+  display: inline-block;
   font-size: 20px;
   font-weight: 500;
   line-height: 1.2;
@@ -135,6 +135,7 @@
   border-radius: 8px;
   padding: 4px 8px;
   margin: 8px 0 0;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 627px) {
