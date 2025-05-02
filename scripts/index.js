@@ -98,6 +98,15 @@ function handleEditProfileSubmit(evt) {
 
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
+
+  const cardInputValues = {
+    name: newPostCaptionInput.value,
+    link: newPostImageInput.value,
+  };
+
+  const cardElement = getCardElement(cardInputValues);
+  cardsList.prepend(cardElement);
+
   const newPostImage = newPostImageInput.value;
   const newPostCaption = newPostCaptionInput.value;
   console.log(newPostImage, newPostCaption);
