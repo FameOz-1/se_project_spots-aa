@@ -76,7 +76,8 @@ function getCardElement(data) {
 
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
   cardDeleteBtnEl.addEventListener("click", () => {
-    cardDeleteBtnEl.closest(".card").remove();
+    let card = cardDeleteBtnEl.closest(".card").remove();
+    card = null;
   });
 
   cardImageEl.addEventListener("click", () => {
