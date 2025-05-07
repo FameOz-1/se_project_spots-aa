@@ -76,7 +76,8 @@ function getCardElement(data) {
 
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
   cardDeleteBtnEl.addEventListener("click", () => {
-    let card = cardDeleteBtnEl.closest(".card").remove();
+    let card = cardDeleteBtnEl.closest(".card");
+    card.remove();
     card = null;
   });
 
@@ -151,5 +152,5 @@ newPostForm.addEventListener("submit", handleNewPostSubmit);
 
 initialCards.forEach(function (item) {
   const cardElement = getCardElement(item);
-  cardsList.append(cardElement);
+  cardsList["prepend"](cardElement);
 });

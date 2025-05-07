@@ -11,7 +11,7 @@
   padding: 0 10px;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s linear 0.5s opacity 0.5s linear;
+  transition: visibility 0.3s, opacity 0.3s ease-in;
 }
 
 .modal_type_preview {
@@ -124,18 +124,19 @@
 }
 
 .modal__caption {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
   color: #fff;
   background-color: #000;
   object-fit: contain;
   display: inline-block;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.2;
   border: 1px #212121 solid;
   border-radius: 8px;
   padding: 4px 8px;
   margin: 8px 0 0;
-  white-space: nowrap;
+  max-width: 435px;
+  white-space: wrap;
 }
 
 @media screen and (max-width: 627px) {
