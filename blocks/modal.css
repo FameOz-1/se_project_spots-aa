@@ -71,13 +71,13 @@
 .modal__label {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  margin-bottom: 32px;
   opacity: 70%;
   line-height: 1.1;
 }
 
 .modal__input {
-  margin-bottom: 32px;
+  margin: 8px 0 0;
   border: 1px #21212166 solid;
   border-radius: 8px;
   padding: 16px 12px;
@@ -94,6 +94,15 @@
 
 .modal__input:hover {
   border: 1px #212121 solid;
+}
+
+.modal__error {
+  display: block;
+  margin-top: 8px;
+  color: #ff0000;
+  opacity: 70%;
+  font-weight: 500;
+  line-height: 110.00000000000001%;
 }
 
 .modal__submit-btn {
