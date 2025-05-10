@@ -60,9 +60,6 @@ const checkInputValidity = (formEl, inputEl) => {
   if (!inputEl.validity.valid) {
     showInputError(formEl, inputEl, inputEl.validationMessage);
   }
-  //   } else {
-  //     hideInputError(formEl, inputEl);
-  //   }
 };
 
 const setEventListeners = (formEl) => {
