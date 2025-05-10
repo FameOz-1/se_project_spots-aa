@@ -32,7 +32,9 @@ const initialCards = [
 const editProfileBtn = document.querySelector(".profile__edit-btn");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
-const editProfileForm = editProfileModal.querySelector(".modal__form");
+const editProfileSubmitBtn =
+  editProfileModal.querySelector(".modal__submit-btn");
+const editProfileForm = editProfileModal.querySelector("#edit-profile-form");
 const editProfileNameInput = editProfileModal.querySelector(
   "#profile-name-input"
 );
@@ -43,7 +45,8 @@ const editProfileDescriptionInput = editProfileModal.querySelector(
 const newPostBtn = document.querySelector(".profile__add-btn");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseBtn = newPostModal.querySelector(".modal__close-btn");
-const newPostForm = newPostModal.querySelector(".modal__form");
+const newPostForm = newPostModal.querySelector("#new-post-form");
+const newPostSubmitBtn = newPostModal.querySelector(".modal__submit-btn");
 const newPostImageInput = newPostModal.querySelector("#post-image-input");
 const newPostCaptionInput = newPostModal.querySelector("#post-caption-input");
 
@@ -102,6 +105,10 @@ function closeModal(modal) {
 editProfileBtn.addEventListener("click", function () {
   editProfileNameInput.value = profileNameEl.textContent;
   editProfileDescriptionInput.value = profileDescriptionEl.textContent;
+  resetValidation(editProfileForm, [
+    editProfileNameInput,
+    editProfileDescriptionInput,
+  ]);
   openModal(editProfileModal);
 });
 
@@ -126,11 +133,11 @@ function handleEditProfileSubmit(evt) {
   profileNameEl.textContent = editProfileNameInput.value;
   profileDescriptionEl.textContent = editProfileDescriptionInput.value;
   closeModal(editProfileModal);
+  disableButton(editProfileSubmitBtn);
 }
 
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
-
   const cardInputValues = {
     name: newPostCaptionInput.value,
     link: newPostImageInput.value,
@@ -138,12 +145,9 @@ function handleNewPostSubmit(evt) {
 
   const cardElement = getCardElement(cardInputValues);
   cardsList.prepend(cardElement);
-
-  const newPostImage = newPostImageInput.value;
-  const newPostCaption = newPostCaptionInput.value;
-  console.log(newPostImage, newPostCaption);
   closeModal(newPostModal);
-  newPostForm.reset(); // Reset the form fields after submission
+  newPostForm.reset();
+  disableButton(newPostSubmitBtn);
 }
 
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);

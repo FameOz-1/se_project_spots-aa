@@ -123,7 +123,7 @@
   font-weight: 500;
 }
 
-.modal__submit-btn_type_disabled {
+.modal__submit-btn_disabled {
   background-color: rgb(33, 33, 33, 0.5);
   cursor: not-allowed;
 }
