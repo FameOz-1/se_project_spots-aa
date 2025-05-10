@@ -31,9 +31,8 @@ An interactive social media web application that allows users to create a person
 
 ## Plans for Finalizing the Project
 
-- Add functionality for users to like photos
-- Implement photo upload feature
-- Enable profile editing
+- Add functionality for saving user photo likes
+- Enhance profile editing by implementing a change/upload profile image feature
 - Add user authentication
 - Enhance mobile responsiveness
 
