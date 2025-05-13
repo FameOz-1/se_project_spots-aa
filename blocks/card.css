@@ -10,6 +10,10 @@
   display: block;
 }
 
+.card__image:hover {
+  cursor: pointer;
+}
+
 .card__delete-btn {
   background: transparent url(../images/delete.svg) no-repeat center / contain;
   width: 32px;
