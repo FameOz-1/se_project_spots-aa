@@ -60,7 +60,52 @@ An interactive social media web application that allows users to create a person
 
 The project is organized using the BEM methodology with a flat file structure:
 
-. ├── blocks/ # Reusable BEM blocks │ ├── card.css # Styles for photo cards │ ├── modal.css # Styles for modals │ ├── profile.css # Styles for the profile section │ └── ... # Additional block styles ├── images/ # Project images ├── pages/ # Page-specific styles │ └── index.css # Main page styles ├── scripts/ # JavaScript files │ ├── index.js # Main JavaScript logic │ ├── validation.js # Form validation logic │ └── utils.js # Utility functions (if applicable) ├── vendor/ # Third-party libraries and fonts │ ├── normalize.css # Normalize CSS for cross-browser consistency │ ├── fonts.css # Font imports │ └── fonts/ # Font files ├── index.html # Main HTML file ├── README.md # Project documentation └── .gitignore # Git ignore file
+project-root/
+├── images/
+│ ├── avatar.jpg
+│ ├── close.svg
+│ ├── close-wht.svg
+│ ├── logo.svg
+│ ├── pencil.svg
+│ └── plus.svg
+│
+├── pages/
+│ └── index.css
+│
+├── blocks/
+│ ├── card/
+│ │ ├── card.css
+│ │ ├── card**image.css
+│ │ ├── card**delete-btn.css
+│ │ ├── card**like-btn.css
+│ │ └── card**caption.css
+│ │
+│ ├── modal/
+│ │ ├── modal.css
+│ │ ├── modal**container.css
+│ │ ├── modal**close-btn.css
+│ │ ├── modal**form.css
+│ │ └── modal**input.css
+│ │
+│ ├── profile/
+│ │ ├── profile.css
+│ │ ├── profile**image.css
+│ │ ├── profile**info.css
+│ │ ├── profile**name.css
+│ │ ├── profile**description.css
+│ │ └── profile**edit-btn.css
+│ │
+│ └── page/
+│ ├── page.css
+│ └── page**content.css
+│
+├── scripts/
+│ ├── index.js
+│ └── validation.js
+│
+├── index.html
+├── README.md
+└── favicon.ico
 
 ## How to Clone and Run the Project Locally
 
