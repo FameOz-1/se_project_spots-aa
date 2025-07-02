@@ -1,3 +1,28 @@
+import "./index.css";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+} from "../scripts/validation.js";
+import logoImage from "../images/logo.svg";
+document.querySelector(".header__logo").src = logoImage;
+import avatarImage from "../images/avatar.jpg";
+document.querySelector(".profile__avatar").src = avatarImage;
+import pencilIcon from "../images/pencil.svg";
+document.querySelector(".profile__pencil-icon").src = pencilIcon;
+import plusIcon from "../images/plus.svg";
+document.querySelector(".profile__add-btn").querySelector("img").src = plusIcon;
+import closeIcon from "../images/close.svg";
+document
+  .querySelectorAll(".modal__close-btn img, .modal__close-btn_type_preview img")
+  .forEach((img) => {
+    img.src = closeIcon;
+  });
+import previewCloseIcon from "../images/close-wht.svg";
+document.querySelector(
+  ".modal__close-btn_type_preview .modal__close-icon"
+).src = previewCloseIcon;
+
 const initialCards = [
   {
     name: "Golden Gate Bridge",
@@ -178,3 +203,5 @@ initialCards.forEach(function (item) {
   const cardElement = getCardElement(item);
   cardsList["prepend"](cardElement);
 });
+
+enableValidation(settings);

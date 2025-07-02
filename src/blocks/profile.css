@@ -52,7 +52,7 @@
   border: none;
   display: flex;
   align-content: center;
-  justify-content: start;
+  justify-content: flex-start;
   font-family: Poppins, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 16px;
