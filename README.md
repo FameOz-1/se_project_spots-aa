@@ -37,6 +37,7 @@ An interactive social media web application that allows users to create a person
 - **Responsive Design**: Optimized for mobile, tablet, and desktop devices.
 - **Media Queries**: Ensures a consistent user experience across devices.
 - **Figma**: Used for design and prototyping.
+- TO-DO: add Webpack, Node.js and gh-pages to technologies and techniques section.
 
 ---
 
@@ -117,7 +118,7 @@ project-root/
 
 2. Navigate to the project directory:
 
-- cd t10_p3_spots-app
+- cd se_project_spots-aa
 
 3. Open index.html in your browser to view the Project
 
