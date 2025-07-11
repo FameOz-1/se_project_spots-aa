@@ -65,11 +65,15 @@ const api = new Api({
 
 api
   .getAppInfo()
-  .then(([cards]) => {
+  .then(([cards, user]) => {
     cards.forEach(function (item) {
       const cardElement = getCardElement(item);
       cardsList.append(cardElement); // Make sure append is correct and prepend is not needed.
     });
+
+    avatarImage.src = user.avatar;
+    editProfileNameInput.textContent = user.name;
+    editProfileDescriptionInput.textContent = user.description;
   })
   .catch(console.error);
 
@@ -194,10 +198,18 @@ newPostCloseBtn.addEventListener("click", function () {
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
-  profileNameEl.textContent = editProfileNameInput.value;
-  profileDescriptionEl.textContent = editProfileDescriptionInput.value;
-  closeModal(editProfileModal);
-  disableButton(editProfileSubmitBtn, settings);
+  api
+    .editUserInfo({
+      name: editProfileNameInput.value,
+      about: editProfileDescriptionInput.value,
+    })
+    .then((data) => {
+      profileNameEl.textContent = data.name;
+      profileDescriptionEl.textContent = data.about;
+      closeModal(editProfileModal);
+      disableButton(editProfileSubmitBtn, settings);
+    })
+    .catch(console.error);
 }
 
 function handleNewPostSubmit(evt) {
