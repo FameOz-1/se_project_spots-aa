@@ -7,7 +7,8 @@ import {
 import logoImage from "../images/logo.svg";
 document.querySelector(".header__logo").src = logoImage;
 import avatarImage from "../images/avatar.jpg";
-document.querySelector(".profile__avatar").src = avatarImage;
+import pencilLightIcon from "../images/pencil-light.svg";
+document.querySelector(".profile__pencil-img").src = pencilLightIcon;
 import pencilIcon from "../images/pencil.svg";
 document.querySelector(".profile__pencil-icon").src = pencilIcon;
 import plusIcon from "../images/plus.svg";
@@ -24,37 +25,6 @@ document.querySelector(
 ).src = previewCloseIcon;
 import Api from "../utils/Api.js";
 
-// const initialCards = [
-//   {
-//     name: "Golden Gate Bridge",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
-//   },
-//   {
-//     name: "Val Thorens",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-//   {
-//     name: "Restaurant terrace",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-//   },
-//   {
-//     name: "Saint Petersburg",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-//   },
-//   {
-//     name: "A very long bridge, over the forest and through the trees",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-//   },
-//   {
-//     name: "Tunnel with morning light",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-//   },
-//   {
-//     name: "Mountain house",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-// ];
-
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -63,20 +33,34 @@ const api = new Api({
   },
 });
 
+const avatarImageEl = document.querySelector(".profile__avatar");
+
 api
   .getAppInfo()
   .then(([cards, user]) => {
     cards.forEach(function (item) {
       const cardElement = getCardElement(item);
       cardsList.append(cardElement); // Make sure append is correct and prepend is not needed.
+      console.log("user.avatar:", user.avatar);
+      console.log("avatarImage:", avatarImage);
+      console.log("avatarImageEl:", avatarImageEl);
     });
 
-    avatarImage.src = user.avatar;
+    avatarImageEl.src = avatarImage;
     editProfileNameInput.textContent = user.name;
     editProfileDescriptionInput.textContent = user.description;
   })
   .catch(console.error);
 
+// Avatar Form Elements
+const avatarModalBtn = document.querySelector(".profile__avatar-btn");
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarCloseBtn = avatarModal.querySelector(".modal__close-btn");
+const avatarForm = avatarModal.querySelector("#edit-avatar-form");
+const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
+const avatarInput = avatarModal.querySelector("#profile-avatar-input");
+
+// Edit-Profile Form Elements
 const editProfileBtn = document.querySelector(".profile__edit-btn");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
@@ -90,6 +74,10 @@ const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
 );
 
+const profileNameEl = document.querySelector(".profile__name");
+const profileDescriptionEl = document.querySelector(".profile__description");
+
+// New Post Foem Elements
 const newPostBtn = document.querySelector(".profile__add-btn");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseBtn = newPostModal.querySelector(".modal__close-btn");
@@ -98,13 +86,14 @@ const newPostSubmitBtn = newPostModal.querySelector(".modal__submit-btn");
 const newPostImageInput = newPostModal.querySelector("#post-image-input");
 const newPostCaptionInput = newPostModal.querySelector("#post-caption-input");
 
-const profileNameEl = document.querySelector(".profile__name");
-const profileDescriptionEl = document.querySelector(".profile__description");
-
+// Preview Form Elements
 const previewModal = document.querySelector("#preview-image-modal");
 const previewModalCloseBtn = previewModal.querySelector(".modal__close-btn");
 const previewImageEl = previewModal.querySelector(".modal__image");
 const previewCaptionEl = previewModal.querySelector(".modal__caption");
+
+// Delete Form Elements
+const deleteModal = document.querySelector("#delete-modal");
 
 const cardTemplate = document
   .querySelector("#card-template")
@@ -128,6 +117,7 @@ function getCardElement(data) {
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
   cardDeleteBtnEl.addEventListener("click", () => {
     let card = cardDeleteBtnEl.closest(".card");
+    openModal(deleteModal);
     card.remove();
     card = null;
   });
@@ -196,6 +186,26 @@ newPostCloseBtn.addEventListener("click", function () {
   closeModal(newPostModal);
 });
 
+avatarModalBtn.addEventListener("click", function () {
+  openModal(avatarModal);
+});
+
+avatarCloseBtn.addEventListener("click", function () {
+  closeModal(avatarModal);
+});
+
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  api
+    .editAvatarInfo(avatarInput.value)
+    .then((data) => {
+      avatarImageEl.src = data.avatar || avatarUrl;
+      closeModal(avatarModal);
+      //   disableButton(avatarSubmitBtn);
+    })
+    .catch(console.error);
+}
+
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
   api
@@ -225,6 +235,8 @@ function handleNewPostSubmit(evt) {
   newPostForm.reset();
   disableButton(newPostSubmitBtn);
 }
+
+avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
