@@ -33,8 +33,6 @@ const api = new Api({
   },
 });
 
-const avatarImageEl = document.querySelector(".profile__avatar");
-
 api
   .getAppInfo()
   .then(([cards, user]) => {
@@ -43,13 +41,14 @@ api
       cardsList.append(cardElement); // Make sure append is correct and prepend is not needed.
     });
 
-    avatarImageEl.src = user.avatar || avatarImage;
+    avatarImageEl.src = user.avatar;
     editProfileNameInput.textContent = user.name;
     editProfileDescriptionInput.textContent = user.description;
   })
   .catch(console.error);
 
 // Avatar Form Elements
+const avatarImageEl = document.querySelector(".profile__avatar");
 const avatarModalBtn = document.querySelector(".profile__avatar-btn");
 const avatarModal = document.querySelector("#avatar-modal");
 const avatarCloseBtn = avatarModal.querySelector(".modal__close-btn");
@@ -108,22 +107,16 @@ function getCardElement(data) {
   const cardLikeBtnEl = cardElement.querySelector(".card__like-btn");
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
 
+  if (data.isLiked) {
+    cardLikeBtnEl.classList.add("card__like-btn_active");
+  }
+
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
 
-  cardLikeBtnEl.addEventListener("click", () => {
-    cardLikeBtnEl.classList.toggle("card__like-btn_active");
-  });
-
-  //   cardDeleteBtnEl.addEventListener("click", () => {
-  //     let card = cardDeleteBtnEl.closest(".card");
-  //     openModal(deleteModal);
-  //     card.remove();
-  //     card = null;
-  //   });
-
-  cardDeleteBtnEl.addEventListener("click", (evt) =>
+  cardLikeBtnEl.addEventListener("click", (evt) => handleLike(evt, data._id));
+  cardDeleteBtnEl.addEventListener("click", () =>
     handleDeleteCard(cardElement, data._id)
   );
 
@@ -135,6 +128,16 @@ function getCardElement(data) {
   });
 
   return cardElement;
+}
+
+function handleLike(evt, id) {
+  const isLiked = evt.target.classList.contains("card__like-btn_active");
+  api
+    .handleLikeStatus(id, isLiked)
+    .then(() => {
+      evt.target.classList.toggle("card__like-btn_active");
+    })
+    .catch(console.error);
 }
 
 function handleEscapeKey(evt) {
@@ -210,7 +213,6 @@ function handleAvatarSubmit(evt) {
     .then((data) => {
       avatarImageEl.src = data.avatar;
       closeModal(avatarModal);
-      //   disableButton(avatarSubmitBtn);
     })
     .catch(console.error);
 }
@@ -233,16 +235,34 @@ function handleEditProfileSubmit(evt) {
 
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
-  const cardInputValues = {
-    name: newPostCaptionInput.value,
-    link: newPostImageInput.value,
-  };
 
-  const cardElement = getCardElement(cardInputValues);
-  cardsList.prepend(cardElement);
-  closeModal(newPostModal);
-  newPostForm.reset();
-  disableButton(newPostSubmitBtn);
+  const name = newPostCaptionInput.value.trim();
+  const link = newPostImageInput.value.trim();
+
+  newPostSubmitBtn.textContent = "Saving…";
+  newPostSubmitBtn.disabled = true;
+
+  api
+    .postCards({ name, link })
+    .then((cardData) => {
+      cardsList.prepend(getCardElement(cardData));
+      newPostForm.reset();
+      disableButton(newPostSubmitBtn, settings);
+    })
+    .catch((err) => {
+      console.error("Error creating card:", err);
+    })
+    .finally(() => {
+      newPostSubmitBtn.textContent = "Create";
+      newPostSubmitBtn.disabled = false;
+      closeModal(newPostModal);
+    });
+}
+
+function handleDeleteCard(cardElement, cardId) {
+  selectedCard = cardElement;
+  selectedCardId = cardId;
+  openModal(deleteModal);
 }
 
 function handleDeleteSubmit(evt) {
@@ -250,16 +270,10 @@ function handleDeleteSubmit(evt) {
   api
     .deleteCard(selectedCardId)
     .then(() => {
-      remove(selectedCard);
+      selectedCard.remove();
       closeModal(deleteModal);
     })
     .catch(console.error);
-}
-
-function handleDeleteCard(cardElement, cardId) {
-  selectedCard = cardElement;
-  selectedCardId = cardId;
-  openModal(deleteModal);
 }
 
 avatarForm.addEventListener("submit", handleAvatarSubmit);
