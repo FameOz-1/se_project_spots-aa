@@ -3,6 +3,7 @@ import {
   enableValidation,
   settings,
   resetValidation,
+  disableButton,
 } from "../scripts/validation.js";
 import logoImage from "../images/logo.svg";
 document.querySelector(".header__logo").src = logoImage;
@@ -41,9 +42,9 @@ api
       cardsList.append(cardElement); // Make sure append is correct and prepend is not needed.
     });
 
-    avatarImageEl.src = user.avatar;
-    editProfileNameInput.textContent = user.name;
-    editProfileDescriptionInput.textContent = user.description;
+    avatarImageEl.src = user.avatar || avatarImage;
+    profileNameEl.textContent = user.name;
+    profileDescriptionEl.textContent = user.about;
   })
   .catch(console.error);
 
@@ -167,17 +168,6 @@ document.querySelectorAll(".modal").forEach((modal) => {
   });
 });
 
-editProfileBtn.addEventListener("click", function () {
-  editProfileNameInput.value = profileNameEl.textContent;
-  editProfileDescriptionInput.value = profileDescriptionEl.textContent;
-
-  const inputList = Array.from(
-    editProfileForm.querySelectorAll(settings.inputSelector)
-  );
-  resetValidation(editProfileForm, inputList, settings);
-  openModal(editProfileModal);
-});
-
 editProfileCloseBtn.addEventListener("click", function () {
   closeModal(editProfileModal);
 });
@@ -208,17 +198,42 @@ deleteCloseBtn.addEventListener("click", function () {
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+
+  avatarSubmitBtn.textContent = "Saving...";
+  avatarSubmitBtn.disabled = true;
+
   api
     .editAvatarInfo(avatarInput.value)
     .then((data) => {
       avatarImageEl.src = data.avatar;
-      closeModal(avatarModal);
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error("Error creating card:", err);
+    })
+    .finally(() => {
+      closeModal(avatarModal);
+      avatarSubmitBtn.textContent = "Save";
+      avatarForm.reset();
+    });
 }
+
+editProfileBtn.addEventListener("click", function () {
+  editProfileNameInput.value = profileNameEl.textContent;
+  editProfileDescriptionInput.value = profileDescriptionEl.textContent;
+
+  const inputList = Array.from(
+    editProfileForm.querySelectorAll(settings.inputSelector)
+  );
+  resetValidation(editProfileForm, inputList, settings);
+  openModal(editProfileModal);
+});
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
+
+  const editProfileSubmitBtn = evt.submitter;
+  editProfileSubmitBtn.textContent = "Saving...";
+
   api
     .editUserInfo({
       name: editProfileNameInput.value,
@@ -227,10 +242,16 @@ function handleEditProfileSubmit(evt) {
     .then((data) => {
       profileNameEl.textContent = data.name;
       profileDescriptionEl.textContent = data.about;
-      closeModal(editProfileModal);
+      editProfileForm.reset();
       disableButton(editProfileSubmitBtn, settings);
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error("Error creating card:", err);
+    })
+    .finally(() => {
+      editProfileSubmitBtn.textContent = "Save";
+      closeModal(editProfileModal);
+    });
 }
 
 function handleNewPostSubmit(evt) {
@@ -239,7 +260,7 @@ function handleNewPostSubmit(evt) {
   const name = newPostCaptionInput.value.trim();
   const link = newPostImageInput.value.trim();
 
-  newPostSubmitBtn.textContent = "Saving…";
+  newPostSubmitBtn.textContent = "Saving...";
   newPostSubmitBtn.disabled = true;
 
   api
@@ -253,7 +274,7 @@ function handleNewPostSubmit(evt) {
       console.error("Error creating card:", err);
     })
     .finally(() => {
-      newPostSubmitBtn.textContent = "Create";
+      newPostSubmitBtn.textContent = "Save";
       newPostSubmitBtn.disabled = false;
       closeModal(newPostModal);
     });
@@ -267,13 +288,22 @@ function handleDeleteCard(cardElement, cardId) {
 
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
+
+  const deleteSubmitBtn = evt.submitter;
+  deleteSubmitBtn.textContent = "Deleting...";
+
   api
     .deleteCard(selectedCardId)
     .then(() => {
       selectedCard.remove();
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error("Error creating card:", err);
+    })
+    .finally(() => {
+      deleteSubmitBtn.textContent = "Delete";
+    });
 }
 
 avatarForm.addEventListener("submit", handleAvatarSubmit);

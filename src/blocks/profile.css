@@ -150,10 +150,6 @@
     padding: 4px;
   }
 
-  /* .profile__avatar-btn:hover {
-    opacity: 50px;
-  } */
-
   .profile__avatar-btn::after {
     content: "";
   }
