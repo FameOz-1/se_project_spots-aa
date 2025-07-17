@@ -42,8 +42,8 @@ An interactive social media web application that allows users to create a person
 
 ## Project Links
 
-- [Link to the project design on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
-- [Link to the project on GitHub Pages](https://fameoz-1.github.io/se_project_spots-aa/)
+- [Link to the project design on Figma](https://www.figma.com/design/mXGZ6wZ4QPKx5KjpHX9QCV/Sprint-9-Project%3A-Spots?node-id=0-1&t=q3sLidv5V6u8hM1F-0)
+- [Link to the project on GitHub Pages](https://github.com/FameOz-1/se_project_spots-aa/deployments/github-pages)
 
 ---
 
@@ -112,7 +112,7 @@ project-root/
 1. Clone the repository:
 
 ```bash
-- git clone https://github.com/fameoz-1/t10_p3_spots-app.git
+- git clone https://github.com/fameoz-1/se_project_spots-aa.git
 ```
 
 2. Navigate to the project directory:
